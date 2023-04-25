@@ -5,6 +5,7 @@ github_issue_number: 461
 tags:
 - postgres
 - sql
+- orm
 date: 2011-05-31
 ---
 

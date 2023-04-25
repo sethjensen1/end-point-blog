@@ -5,6 +5,7 @@ github_issue_number: 594
 tags:
 - database
 - php
+- orm
 date: 2012-04-18
 ---
 

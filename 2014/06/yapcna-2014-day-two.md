@@ -5,6 +5,7 @@ github_issue_number: 1004
 tags:
 - conference
 - perl
+- orm
 date: 2014-06-25
 ---
 
