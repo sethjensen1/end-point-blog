@@ -1,6 +1,6 @@
 ---
 author: "Alina Arnautova"
-title: "N+1 queries in Rails applications"
+title: "Avoiding N+1 queries in Rails applications"
 github_issue_number: 1961
 tags:
 - rails
@@ -9,7 +9,7 @@ tags:
 date: 2023-04-25
 ---
 
-![Looking up a stairwell. A railing ascends at a steep diagonal from the bottom center upward and to the left. The next flight of stairs cuts the railing off, creating a right angle rotated by 45 degrees. On the right side of the image, a light on a wall reflects another diagonal on the right side wall, as well as a yellow glow around the whole stairwell.](/blog/2023/04/n-plus-one-queries-in-rails-apps/2022-12-11_162540.webp)
+![Looking up a stairwell. A railing ascends at a steep diagonal from the bottom center upward and to the left. The next flight of stairs cuts the railing off, creating a right angle rotated by 45 degrees. On the right side of the image, a light on a wall reflects another diagonal on the right side wall, as well as a yellow glow around the whole stairwell.](/blog/2023/04/avoiding-n-plus-one-queries-in-rails-apps/2022-12-11_162540.webp)
 
 <!-- Photo by Seth Jensen, 2022 -->
 
@@ -56,7 +56,7 @@ end
 <% end %>
 ```
 
-For each book, a separate SQL query is executed to retrieve the author’s name. If we have 3 books, there are 4 queries in total. One to fetch all books and three additional queries for fetching associated authors. In the logs it would look something like this:
+For each book, a separate SQL query is executed to retrieve the author’s name. If we have 3 books, there are 4 queries in total: one to fetch all books and three additional queries for fetching associated authors. In the logs it would look something like this:
 
 ```ruby
 SELECT "books".* FROM "books"
@@ -65,7 +65,7 @@ SELECT "authors".* FROM "authors" WHERE "authors"."id" = 2
 SELECT "authors".* FROM "authors" WHERE "authors"."id" = 3
 ```
 
-This is a classic log example of N+1 queries. N being the number of books plus 1 explicit query to fetch all books. 3 + 1 = 4 queries.
+This is a classic example of N+1 queries. N being the number of books plus 1 explicit query to fetch all books. 3 + 1 = 4 queries.
 
 With three books, it doesn't seem like a big deal, but imagine if we had a thousand? Making 1001 requests doesn't sound that efficient. 
 
