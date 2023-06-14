@@ -8,7 +8,7 @@ tags:
 - Arch Linux
 ---
 
-I have been using Manjaro Linux (based on Arch Linux) for my work desktop and PopOS (based on Ubuntu) for my laptop for quite some time now, and wanted to find another Arch Linux-based distro for my daily driver. Rather than aimlessly searching through the hundreds (or thousands) of Linux distros out there, I made several requirements the chosen distro should meet:
+I have been using Manjaro Linux (based on Arch Linux) for my work desktop and PopOS (based on Ubuntu) for my laptop for quite some time now, and wanted to find another Arch Linux-based distro for my daily driver. Rather than aimlessly searching through the hundreds of Linux distros out there, I made several requirements the chosen distro should meet:
 
 - Easy to maintain 
 - Has strong community support and stable development
@@ -16,6 +16,8 @@ I have been using Manjaro Linux (based on Arch Linux) for my work desktop and Po
 - If possible, the distro of choice should be able to trim down the number of default packages (for example, I am a Gnome desktop user, so I don’t want to install the game packages I won't use). 
 
 I decided to use [EndeavourOS](https://endeavouros.com). It supports the features that I need: It has a strong community and most of Arch Linux's documentation/references are still applicable to it (as they are to most Arch Linux-based distros using systemd).
+
+The most notable difference between EndeavourOS and Arch Linux are the GUI-based installer (we can select whether to use XFCE, Plasma KDE, Gnome and several others desktop environments), as well as the eye candy packages (wallpapers) and some other tools (for instance, EndeavourOS QuickStart Installer and EndevourOS log tools). Also, EndevourOS notifies the user when there is a pending OS updates, so this will keep my box up to date (especially when we are in the busy week and probably forget to apply the important OS updates!).  
 
 ### Installation
 
@@ -30,22 +32,26 @@ One thing that I noticed is that by default the cron service is not enabled. Aft
 Bluetooth is another service that isn't running by default. If you want Bluetooth and cron jobs to start automatically, first check whether they are running with:
 
 ```plain
-systemctl status cronie 
-systemctl status bluetooth
+systemctl status cronie bluetooth
 ```
 
 Enable them with:
 
 ```plain
-systemctl enable cronie
-systemctl enable bluetooth
+systemctl enable cronie bluetooth --now
+```
+
+Check the service status again:
+
+```plain
+systemctl status cronie bluetooth
 ```
 
 ### Diving a bit into AUR
 
-Some modern Arch Linux variants come preloaded with [`yay`](https://aur.archlinux.org/packages/yay-git), an AUR (Arch Linux User Repository) helper written in the go language.
+Some modern Arch Linux variants come preloaded with [`yay`](https://aur.archlinux.org/packages/yay-git), an AUR (Arch Linux User Repository) helper written in the Go language.
   
-[ksshaskpass](https://invent.kde.org/plasma/ksshaskpass) is a KDE-based sshaskpass client. We can install it with `yay`.
+[ksshaskpass](https://invent.kde.org/plasma/ksshaskpass) is a KDE-based ssh-askpass client. We can install it with `yay`.
 
 Check the package's availability first:
 
