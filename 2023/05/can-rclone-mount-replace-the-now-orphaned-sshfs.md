@@ -24,7 +24,7 @@ symbolic links are followed and mounted as normal directories
 Timestamps actually do carry over, and seem to be converted to my system timezone 
 If you're using the `-c` option for `ssh-add` (you're prompting for a confirmation), you have to confirm a comedically large amount
 
-I logged into a personal server which lives in Germany, and built my Hugo static website I use to host a podcast. The page generation is very lightweight, but there are a lot of large files to copy. Doing this over SSH means I didn't have to install `hugo` on the server, which is nice because I've experienced some dependency problems on that server when trying to use Hugo.
+I logged into a personal server which lives in Germany, and built a Hugo static website I use to host a podcast. The page generation is very lightweight, but there are a lot of large files to copy. Doing this over SSH means I didn't have to install `hugo` on the server, which is nice because I've experienced some dependency problems on that server when trying to use Hugo.
 
 This should be a perfect use for remote filesystem mounting, but copying files through my local machine comes at the heavy cost of time:
 
