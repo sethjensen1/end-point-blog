@@ -1,14 +1,57 @@
 ---
-title: "Can rclone mount replace the now orphaned sshfs?"
+title: "Using rclone for remote development"
 author: Seth Jensen
 date: 2023-05-26
 ---
 
-When looking into SSHFS after one of my coworkers wrote [a blog post about it](), I was surprised to find that SSHFS was orphaned in 2022. Software versions in package managers are often more than a year out of date, so for a while, using its last release won't be much different than installing any other app through `apt` or `yum`.
+Google Drive: https://rclone.org/drive/
 
-But if no one picks up development on an ongoing basis, using SSHFS will become less of a viable option.
+```
+rclone mount gdrive:/ /path/to/local/mount
+```
 
-One replacement I saw on ArchWiki was using rclone's `mount` command, which behaves in a similar way to SSHFS. I tried mounting several servers I regularly use to see how rclone mount compares to SSHFS, and how it compares in speed to just using SSH to develop on the server.
+SFTP
+
+```
+rclone config
+n
+name> yourserver
+Storage> sftp
+host> your-host-address.com
+user> your-user
+port> (blank - default 22)
+Option pass.
+y/g/n> n (blank - use ssh-agent)
+key_pem> (blank)
+key_file> (blank - use ssh-agent)
+Option key_file_pass
+y/g/n> (blank)
+Option pubkey.
+pubkey> (blank)
+pubkey_file> (blank)
+key_use_agent> (blank)
+use_insecure_cipher> (blank - false)
+disable_hashcheck> (blank - false)
+ssh> (blank)
+Edit advanced config?
+y/n> n
+```
+
+macOS
+
+```
+mkdir -p /Volumes/rclone/yourserver
+```
+
+Linux
+
+```
+mkdir -p /mnt/rclone/yourserver
+```
+
+```
+rclone mount yourserver: /Volumes/rclone/yourserver
+```
 
 
 
@@ -59,3 +102,18 @@ End Point site on ln19 via rclone mount:
 
 Total in 8412837 ms
 ```
+
+
+
+
+
+Prolly throw this out:
+
+When looking into SSHFS after one of my coworkers wrote [a blog post about it](), I was surprised to find that SSHFS was orphaned in 2022. Software versions in package managers are often more than a year out of date, so for a while, using its last release won't be much different than installing any other app through `apt` or `yum`.
+
+But if no one picks up development on an ongoing basis, using SSHFS will become less of a viable option.
+
+One replacement I saw on ArchWiki was using rclone's `mount` command, which behaves in a similar way to SSHFS. I tried mounting several servers I regularly use to see how rclone mount compares to SSHFS, and how it compares in speed to just using SSH to develop on the server.
+
+
+
